@@ -46,4 +46,6 @@ Dato datoStr(string valorStr);
 
 bool operator==(const Dato&, const Dato&);
 
+bool operator!=(const Dato&, const Dato&);
+
 #endif // DATO_H

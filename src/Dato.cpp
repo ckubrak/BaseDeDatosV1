@@ -41,3 +41,7 @@ bool operator==(const Dato& d1, const Dato& d2) {
     }
     return false;
 }
+
+bool operator!=(const Dato& d1, const Dato& d2) {
+    return !(d1 == d2);
+}
