@@ -1,7 +1,5 @@
-#include <assert.h>
 #include "Tabla.h"
-#include "Registro.h"
-#include <vector>
+#include "utils.h"
 
 using namespace std;
 
@@ -30,4 +28,24 @@ const Dato Tabla::tipoCampo(string campo) const {
 
 vector<Registro> Tabla::registros() const {
     return _registros;
+}
+
+bool operator==(const Tabla& t1, const Tabla& t2) {
+    if (not seteq(t1.campos(), t2.campos())) {
+        return false;
+    } else if (not seteq(t1.claves(), t2.claves())) {
+        return false;
+    } else {
+        vector<string> cs = t1.campos();
+        for (int i = 0; i < cs.size(); ++i) {
+            if (t1.tipoCampo(cs[i]).esNat() != t2.tipoCampo(cs[i]).esNat()) {
+                return false;
+            }
+        }
+        return seteq(t1.registros(), t2.registros());
+    }
+}
+
+bool operator!=(const Tabla& t1, const Tabla& t2) {
+    return not (t1 == t2);
 }

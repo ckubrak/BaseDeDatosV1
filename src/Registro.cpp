@@ -1,10 +1,5 @@
-//
-// Created by march on 07/08/17.
-//
-
 #include <iostream>
 #include "Registro.h"
-#include "Dato.h"
 #include "utils.h"
 
 using namespace std;

@@ -30,8 +30,26 @@ TEST(dato_test, valores) {
     EXPECT_EQ(Dato(100, "chau", false).valorStr(), "chau");
 }
 
-TEST(dato_test, shortcuts) {
-    // TODO: Tests de generadores shortcut
+TEST(dato_test, igobs) {
+    EXPECT_EQ(Dato(5, "", true), Dato(5, "", true));
+    EXPECT_EQ(Dato(5, "hola", true), Dato(5, "chau", true));
+    EXPECT_NE(Dato(10, "hola", true), Dato(5, "hola", true));
+    EXPECT_NE(Dato(5, "", false), Dato(5, "", true));
+
+    EXPECT_EQ(Dato(5, "hola", false), Dato(5, "hola", false));
+    EXPECT_EQ(Dato(1, "hola", false), Dato(5, "hola", false));
+    EXPECT_NE(Dato(5, "holas", false), Dato(5, "hola", false));
+    EXPECT_NE(Dato(5, "hola", true), Dato(5, "hola", false));
 }
 
-// TODO: Test ==
+TEST(dato_test, shortcuts) {
+    EXPECT_EQ(datoNat(5), Dato(5, "", true));
+    EXPECT_EQ(datoNat(5), Dato(5, "hola", true));
+    EXPECT_NE(datoNat(10), Dato(5, "hola", true));
+    EXPECT_NE(datoNat(5), Dato(5, "hola", false));
+
+    EXPECT_EQ(datoStr("hola"), Dato(5, "hola", false));
+    EXPECT_EQ(datoStr("hola"), Dato(10, "hola", false));
+    EXPECT_NE(datoStr(""), Dato(5, "hola", false));
+    EXPECT_NE(datoStr("hola"), Dato(5, "hola", true));
+}

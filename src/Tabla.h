@@ -38,5 +38,8 @@ private:
 
 };
 
+bool operator==(const Tabla&, const Tabla&);
+bool operator!=(const Tabla&, const Tabla&);
+
 
 #endif //TABLA_H
