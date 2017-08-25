@@ -29,6 +29,24 @@ public:
     // @observador
     vector<Registro> registros() const;
 
+	// @otras operaciones 
+    bool mismosTipos(/*vector<string> campos, */ Registro r) const;     
+
+    // @otras operaciones 
+    bool puedoInsertar(Registro r) const;
+
+    // @otras operaciones 
+    bool compatible(Registro r) const;
+
+    // @otras operaciones 
+    bool hayCoincidencia(Registro r/*, vector<string> campos , vector<Registro> registros*/) const;
+
+	// @otras operaciones 
+    vector<Registro> filtrarRegistros(Registro r, string clave /*, vector<Registro> registros*/) const;   
+
+
+
+
 private:
 
     vector<string> _campos;
