@@ -29,20 +29,23 @@ public:
     // @observador
     vector<Registro> registros() const;
 
-	// @otras operaciones 
-    bool mismosTipos(/*vector<string> campos, */ Registro r) const;     
+    // @otras operaciones
+    /// @todo preguntar si el vector de campo lo paso por parametro o lo saco de la tabla
+    bool mismosTipos(/*vector<string> campos, */ Registro r) const;
 
-    // @otras operaciones 
+    // @otras operaciones
     bool puedoInsertar(Registro r) const;
 
-    // @otras operaciones 
+    // @otras operaciones
     bool compatible(Registro r) const;
 
-    // @otras operaciones 
+    // @otras operaciones
+    /// @todo preguntar si el vector de campo lo paso por parametro o lo saco de la tabla
     bool hayCoincidencia(Registro r/*, vector<string> campos , vector<Registro> registros*/) const;
 
-	// @otras operaciones 
-    vector<Registro> filtrarRegistros(Registro r, string clave /*, vector<Registro> registros*/) const;   
+    // @otras operaciones
+    /// @todo preguntar si el vector de registro lo paso por parametro o lo saco de la tabla
+    vector<Registro> filtrarRegistros(Registro r, string clave /*, vector<Registro> registros*/) const;
 
 
 
