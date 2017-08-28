@@ -65,11 +65,8 @@ bool esta(string campo , Registro r){
 Dato Tabla::tipoCampo(string campo)
 
 bool mismosTipos(vector<string> campos , Registro r) {
-	vector<string> v = r.campos();
-	
-	int i = 0;
-	while( campos.size() > i){
-		if(!esta(campos[i],r)){
+	while(i < campos.size()){
+		if(tipoCampo(campos[i]) != r.dato(campos[i])){
 			return false;
 		}
 		i++;
