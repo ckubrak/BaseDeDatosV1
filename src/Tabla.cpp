@@ -62,9 +62,10 @@ bool esta(string campo , Registro r){
 	return false;
 }
 
-Dato Tabla::tipoCampo(string campo)
+
 
 bool mismosTipos(vector<string> campos , Registro r) {
+	int i = 0;
 	while(i < campos.size()){
 		if(tipoCampo(campos[i]) != r.dato(campos[i])){
 			return false;
@@ -88,4 +89,4 @@ vector<Registro> filtrarRegistros(Registro r, string clave){
 		i++;
 	}
 }
-
+*/
