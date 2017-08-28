@@ -49,3 +49,46 @@ bool operator==(const Tabla& t1, const Tabla& t2) {
 bool operator!=(const Tabla& t1, const Tabla& t2) {
     return not (t1 == t2);
 }
+
+
+bool esta(string campo , Registro r){
+	int i = 0;
+	while(i < r.campos().size()){
+		if(campo == r.campos()[i]){
+			return true;
+		}
+		i++;
+	}
+	return false;
+}
+
+Dato Tabla::tipoCampo(string campo)
+
+bool mismosTipos(vector<string> campos , Registro r) {
+	vector<string> v = r.campos();
+	
+	int i = 0;
+	while( campos.size() > i){
+		if(!esta(campos[i],r)){
+			return false;
+		}
+		i++;
+	}
+	return true;
+}     
+
+
+//registro, clave 
+//conjunto(registro) de la tabla(supongo)
+/*
+vector<Registro> filtrarRegistros(Registro r, string clave){
+	vector<Registro> filtrados;
+	int i = 0;
+	while(i < _registros.size()){
+		if(r.dato(r.campo()[i]) == _registros){
+
+		}
+		i++;
+	}
+}
+
