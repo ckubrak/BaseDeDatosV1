@@ -51,7 +51,7 @@ bool operator!=(const Tabla& t1, const Tabla& t2) {
 }
 
 
-bool esta(string campo , Registro r){
+bool Tabla::esta(string campo , Registro r){
 	int i = 0;
 	while(i < r.campos().size()){
 		if(campo == r.campos()[i]){
@@ -64,7 +64,7 @@ bool esta(string campo , Registro r){
 
 
 
-bool mismosTipos(vector<string> campos , Registro r) {
+bool Tabla::mismosTipos(vector<string> campos , Registro r) {
 	int i = 0;
 	while(i < campos.size()){
 		if(tipoCampo(campos[i]) != r.dato(campos[i])){
@@ -78,15 +78,23 @@ bool mismosTipos(vector<string> campos , Registro r) {
 
 //registro, clave 
 //conjunto(registro) de la tabla(supongo)
-/*
-vector<Registro> filtrarRegistros(Registro r, string clave){
+//la clave pasada esta en cada uno de los registros (por requiere)
+//filtra por la clave, en los que coinciden el valor del registro pasado por parametro y algun registro del la tabla
+vector<Registro> Tabla::filtrarRegistros(Registro r, string clave){
 	vector<Registro> filtrados;
 	int i = 0;
+	Dato valor = r.dato(clave);
 	while(i < _registros.size()){
-		if(r.dato(r.campo()[i]) == _registros){
-
+		if(valor == _registros[i].dato(clave)){
+			filtrados.push_back(_registros[i]);
 		}
 		i++;
 	}
+	return filtrados;
 }
-*/
+
+bool Tabla::compatible(Registro r){
+	if(r.campos().size() == _campos.size()){
+		
+	}
+}
