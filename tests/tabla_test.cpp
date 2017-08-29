@@ -118,3 +118,14 @@ TEST_F(TablaTests, igobs) {
     t2.agregarRegistro(Registro({"Nombre", "LU"}, {datoStr("Ana"), datoStr("100/10")}));
     EXPECT_EQ(t1, t2); // Agrego registros en otro orden
 }
+
+
+
+TEST_F(TablaTests, compatible) {
+  vector<string> campos = {"LU", "Año", "Nombre", "Carrera"};
+  Registro r1(campos, {datoNat(181), datoNat(2017), datoStr("March"), datoStr("Comp")});
+  // Registro rSinCarrera(campos, {datoNat(181), datoNat(2017), datoStr("March")});
+
+  EXPECT_TRUE(t.compatible(r1));
+  EXPECT_FALSE(t2.compatible(r1));
+}
