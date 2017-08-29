@@ -29,7 +29,7 @@ public:
     // @observador
     vector<Registro> registros() const;
 
-    bool esta(string campo , Registro r);
+    bool esta(string campo);
     //bool esta(string campo , Registro r) const;
 
     // @otras operaciones
@@ -37,7 +37,7 @@ public:
     bool mismosTipos(vector<string> campos , Registro r) ;//const;
 
     // @otras operaciones
-    bool compatible(Registro r) const;
+    bool compatible(Registro r);
 
     // @otras operaciones
     bool puedoInsertar(Registro r) const;

@@ -51,10 +51,10 @@ bool operator!=(const Tabla& t1, const Tabla& t2) {
 }
 
 
-bool Tabla::esta(string campo , Registro r){
+bool Tabla::esta(string campo){
 	int i = 0;
-	while(i < r.campos().size()){
-		if(campo == r.campos()[i]){
+	while(i < _campos.size()){
+		if(campo == _campos[i]){
 			return true;
 		}
 		i++;
@@ -93,8 +93,14 @@ vector<Registro> Tabla::filtrarRegistros(Registro r, string clave){
 	return filtrados;
 }
 
+
+//los campos de r y los campos de la tabla coinciden y ademas tienen el mismo tipo 
 bool Tabla::compatible(Registro r){
+	int i = 0;
 	if(r.campos().size() == _campos.size()){
-		
+		while(esta(r.campos()[i]) && r.dato(r.campos()[i]) == tipoCampo(r.campos()[i])){
+			i++;
+		}
 	}
+	return i == _campos.size();
 }
