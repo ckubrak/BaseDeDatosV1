@@ -98,7 +98,7 @@ vector<Registro> Tabla::filtrarRegistros(Registro r, string clave){
 bool Tabla::compatible(Registro r){
 	int i = 0;
 	if(r.campos().size() == _campos.size()){
-		while(esta(r.campos()[i]) && r.dato(r.campos()[i]) == tipoCampo(r.campos()[i])){
+		while(esta(r.campos()[i]) && r.dato(r.campos()[i]) != tipoCampo(r.campos()[i])){
 			i++;
 		}
 	}
