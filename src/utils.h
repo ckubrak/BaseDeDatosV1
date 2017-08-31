@@ -12,6 +12,7 @@ bool pertenece(T x, vector<T> v) {
 }
 
 template<class T>
+//mira si v1 esta contenido en v2
 bool subset(vector<T> v1, vector<T> v2) {
     for (int i = 0; i < v1.size(); ++i) {
         if (not pertenece(v1[i], v2)) {
@@ -22,6 +23,7 @@ bool subset(vector<T> v1, vector<T> v2) {
 }
 
 template<class T>
+//mira si (v1 interseccion v2) es igual a (v1 union v2)
 bool seteq(vector<T> v1, vector<T> v2) {
     return subset(v1, v2) and subset(v2, v1);
 }
