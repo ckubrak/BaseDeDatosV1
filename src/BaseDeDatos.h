@@ -7,11 +7,11 @@
 class BaseDeDatos {
 public: 
 
-	BaseDeDatos(vector<Tabla> v, );
+	BaseDeDatos(vector<Tabla> v);
 
 	void agregarTabla(const Tabla& T, string nombre);
 
-	bool isercionValida(const Tabla&, Registro r);
+	bool insercionValida(const Tabla&, Registro r);
 
 	void insercion( Tabla&, Registro r);
 
@@ -27,3 +27,5 @@ private:
 
 
 };
+
+#endif
