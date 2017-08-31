@@ -3,6 +3,7 @@
 
 #include "Tabla.h"
 
+typedef vector<Restriccion> Criterio;
 
 class BaseDeDatos {
 public: 
@@ -11,11 +12,11 @@ public:
 
 	void agregarTabla(const Tabla& T, string nombre);
 
-	bool insercionValida(const Tabla&, Registro r);
+	bool insercionValida(const Tabla& T, Registro r);
 
-	void insercion( Tabla&, Registro r);
+	void insercion(Tabla& T, Registro r);
 
-	void criterioValido( const Tabla&, Criterio c);
+	void criterioValido(const Tabla& T, Criterio c);
 
 	vector<Criterio> criterioMasUsado();
 
