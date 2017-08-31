@@ -2,6 +2,7 @@
 ## Enunciado
 - Agregado de ejemplo y aclaración de criterio de búsqueda
 - Aclaración sobre el/los criterios más usados
+- Aclaración de no modificar codigo de la cátedra
 
 # 1.1 [2017-08-25]
 ## Especificación
