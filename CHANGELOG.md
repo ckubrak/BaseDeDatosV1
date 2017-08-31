@@ -1,3 +1,8 @@
+# 1.2 [2017-08-31]
+## Enunciado
+- Agregado de ejemplo y aclaración de criterio de búsqueda
+- Aclaración sobre el/los criterios más usados
+
 # 1.1 [2017-08-25]
 ## Especificación
 - Corrección de axioma de **compatible** en TAD Tabla
