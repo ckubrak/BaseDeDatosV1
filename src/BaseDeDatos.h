@@ -18,7 +18,7 @@ public:
 
 	void criterioValido(const Tabla& T, Criterio c);
 
-	vector<Criterio> criterioMasUsado();
+	Criterio criterioMasUsado();
 
 
 private:
