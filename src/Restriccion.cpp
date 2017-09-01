@@ -1,11 +1,9 @@
 #include "Restriccion.h"
 
 
-Restriccion::Restriccion(string campo, Dato valor, bool opcion ){
-  _campo = campo;
-  _valor = valor;
-  _opcion = opcion;
-}
+Restriccion::Restriccion(string campo, Dato valor, bool opcion ):
+  _campo(campo), _valor(valor), _opcion(opcion) {};
+
 
 string Restriccion::campo(){
 	return _campo;
