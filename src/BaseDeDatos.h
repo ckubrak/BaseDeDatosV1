@@ -31,9 +31,9 @@ public:
 
 private:
 
-	vector<Criterio>* _criterios;
-	vector<Tabla>* _tablas ;
-	vector<string>* nombres;
+	vector<Criterio> _criterios;
+	vector<Tabla> _tablas ;
+	vector<string> nombres;
 
 
 };
