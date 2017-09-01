@@ -1,37 +1,31 @@
 #ifndef Restriccion_H
 #define Restriccion_H
 
+#include "Dato.h"
 
-template<typename T>
+//
+
+//typedef typename vector<Restriccion> Criterio;
+
+//template<class T>
+
 class Restriccion {
  public:
 
-    Restriccion(string campo, T valor, bool opcion );
+    Restriccion(string campo, Dato valor, bool opcion );
     string campo();
-    T valor();
+    Dato valor();
     bool opcion();
 
  private:
 
 
   string _campo;
-  T _valor;
+  Dato _valor;
   bool _opcion;
 };
 
-template<typename T>
-string Restriccion::campo(){
-	return _campo;
-}
 
-template<typename T>
-T Restriccion::valor(){
-	return _valor;
-}
 
-template<typename T>
-bool Restriccion::opcion(){
-	return _opcion;
-}
 
 #endif

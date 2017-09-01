@@ -7,9 +7,10 @@
 typedef vector<Restriccion> Criterio;
 
 class BaseDeDatos {
+
 public: 
 
-	BaseDeDatos(vector<Tabla> v);
+	BaseDeDatos(vector< pair<Tabla,string> > v);
 
 	void agregarTabla(const Tabla& T, string nombre);
 
@@ -27,18 +28,15 @@ public:
 
 	int cantidadDeUsos(Criterio c);
 
-	bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
 private:
 
-	vector<Criterio> _criterios;
-	vector<Tabla> _tablas ;
-	vector<string> nombres;
-
-
+	vector<Criterio > _criterios;
+	vector<pair<Tabla,string>> _tablas;
 };
 
 
+	bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
 
 #endif
