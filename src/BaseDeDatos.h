@@ -13,7 +13,7 @@ public:
 
 	void agregarTabla(const Tabla& T, string nombre);
 
-	void agregarENTabla(Tabla T, Registro r);
+	void agregarENTabla(Tabla& T, Registro r);
 
 	bool insercionValida(const Tabla& T, Registro r);
 
