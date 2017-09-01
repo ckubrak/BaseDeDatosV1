@@ -1,16 +1,20 @@
 #include "Restriccion.h"
 
-//template<class T>
+
+Restriccion::Restriccion(string campo, Dato valor, bool opcion ){
+  _campo = campo;
+  _valor = valor;
+  _opcion = opcion;
+}
+
 string Restriccion::campo(){
 	return _campo;
 }
 
-//template<class T>
 Dato Restriccion::valor(){
 	return _valor;
 }
 
-//template<class T>
 bool Restriccion::opcion(){
 	return _opcion;
 }
