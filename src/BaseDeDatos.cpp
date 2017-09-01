@@ -1,3 +1,4 @@
 #include "BaseDeDatos.h"
 
-int a = 1;
+BaseDeDatos::BaseDeDatos (vector<pair<Tabla,string> > tablas)
+  : _tablas(tablas) {};
