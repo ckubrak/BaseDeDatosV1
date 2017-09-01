@@ -1,8 +1,8 @@
 #ifndef _REGISTRO_H
 #define _REGISTRO_H
 
-#include<vector>
-#include<iostream>
+#include <vector>
+#include <iostream>
 #include "Dato.h"
 
 using namespace std;

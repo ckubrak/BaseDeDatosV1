@@ -119,7 +119,7 @@ TEST_F(TablaTests, igobs) {
     EXPECT_EQ(t1, t2); // Agrego registros en otro orden
 }
 
-
+/*
 
 TEST_F(TablaTests, compatible) {
   vector<string> campos = {"LU", "Año", "Nombre", "Carrera"};
@@ -129,3 +129,4 @@ TEST_F(TablaTests, compatible) {
   EXPECT_TRUE(t.compatible(r1));
   EXPECT_FALSE(t2.compatible(r1));
 }
+*/
