@@ -30,7 +30,7 @@ T Restriccion::valor(){
 }
 
 template<typename T>
-bool Restriccion::esNat(){
+bool Restriccion::opcion(){
 	return _opcion;
 }
 
