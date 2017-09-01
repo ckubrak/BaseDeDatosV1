@@ -9,7 +9,7 @@ class Restriccion {
     Restriccion(string campo, T valor, bool opcion );
     string campo();
     T valor();
-    bool esNat();
+    bool opcion();
 
  private:
 
