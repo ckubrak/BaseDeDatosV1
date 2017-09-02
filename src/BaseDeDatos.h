@@ -13,6 +13,7 @@ public:
   /// @generador
 	BaseDeDatos(vector< pair<Tabla,string> > v);
 
+
   /// @generador
 	void agregarTabla(const Tabla& T, string nombre);
 
@@ -26,16 +27,13 @@ public:
 	void insercion(Tabla& T, Registro r);
 
   /// @otra operacion
-	void criterioValido(const Tabla& T, Criterio c);
+	void criterioValido(const Tabla& T, Criterio c) const;
 
   /// @otra operacion
-	Criterio criterioMasUsado();
-
-  /// @observador
-	vector<Tabla> tablas();
+	Criterio criterioMasUsado() const;
 
   /// @otra operacion
-	int cantidadDeUsos(Criterio c);
+	int cantidadDeUsos(Criterio c) const;
 
 
 private:
@@ -45,7 +43,8 @@ private:
 };
 
 
-	bool operator==(const BaseDeDatos&, const BaseDeDatos&);
+bool operator==(const BaseDeDatos&, const BaseDeDatos&);
+bool operator!=(const BaseDeDatos&, const BaseDeDatos&);
 
 
 #endif
