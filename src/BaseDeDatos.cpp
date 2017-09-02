@@ -12,5 +12,13 @@ vector<Tabla> BaseDeDatos::tablas(){
   for (unsigned int i = 0; i < _tablas.size(); ++i){
       resultado.push_back(_tablas[i].first);
   }
-         return resultado;
+  return resultado;
+}
+
+int BaseDeDatos::cantidadDeUsos(Criterio c){
+  for (unsigned int i = 0; i < _criterios.size(); ++i){
+    if (_criterios[i].first == c)
+      return _criterios[i].second;
+  }
+  return 0;
 }
