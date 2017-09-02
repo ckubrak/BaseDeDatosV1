@@ -13,7 +13,6 @@ public:
   /// @generador
 	BaseDeDatos(vector< pair<Tabla,string> > v);
 
-
   /// @generador
 	void agregarTabla(const Tabla& T, string nombre);
 
@@ -31,6 +30,9 @@ public:
 
   /// @otra operacion
 	Criterio criterioMasUsado() const;
+
+  /// @observador
+	vector<Tabla> tablas() const;
 
   /// @otra operacion
 	int cantidadDeUsos(Criterio c) const;
