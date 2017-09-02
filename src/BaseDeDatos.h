@@ -31,7 +31,7 @@ public:
 
 private:
 
-	vector<Criterio > _criterios;
+	vector<pair<Criterio, int> > _criterios;
 	vector<pair<Tabla,string>> _tablas;
 };
 
