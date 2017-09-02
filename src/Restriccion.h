@@ -12,9 +12,16 @@
 class Restriccion {
  public:
 
+  // @generador
     Restriccion(string campo, Dato valor, bool opcion );
+
+    // @observador
     string campo() const;
+
+    // @observador
     Dato valor() const;
+
+    // @observador
     bool opcion() const;
 
  private:
