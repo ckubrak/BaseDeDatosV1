@@ -13,9 +13,9 @@ class Restriccion {
  public:
 
     Restriccion(string campo, Dato valor, bool opcion );
-    string campo();
-    Dato valor();
-    bool opcion();
+    string campo() const;
+    Dato valor() const;
+    bool opcion() const;
 
  private:
 
@@ -26,6 +26,8 @@ class Restriccion {
 };
 
 
+bool operator==(const Restriccion&, const Restriccion&);
+bool operator!=(const Restriccion&, const Restriccion&);
 
 
 #endif
