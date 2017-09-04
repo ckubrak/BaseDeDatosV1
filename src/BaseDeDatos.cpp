@@ -25,9 +25,6 @@ vector<Criterio> BaseDeDatos::criterios(){
   return resultado;
 }
 
-int BaseDeDatos::maximoUso(){
-  return _maximoUso;
-}
 
 vector<Tabla> BaseDeDatos::tablas() const{
   vector<Tabla> resultado;
