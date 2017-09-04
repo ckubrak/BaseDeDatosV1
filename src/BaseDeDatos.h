@@ -29,7 +29,7 @@ public:
 	void criterioValido(const Tabla& T, Criterio c) const;
 
   /// @otra operacion
-	Criterio criterioMasUsado() const;
+	vector<Criterio> criteriosMasUsado() const;
 
   /// @observador
 	vector<Tabla> tablas() const;
