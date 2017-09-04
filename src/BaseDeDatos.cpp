@@ -22,3 +22,20 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   }
   return 0;
 }
+
+vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
+  vector<Criterio> masUsados;
+  masUsados.push_back(_criterios[0].first);
+  int cantVeces = _criterios[0].second;
+
+  for (unsigned int i = 0; i < _criterios.size(); ++i){
+    if (_criterios[i].second == cantVeces)
+      masUsados.push_back(_criterios[i].first);
+
+    if (_criterios[i].second > cantVeces){
+      masUsados.clear();
+      masUsados.push_back(_criterios[i].first);
+      cantVeces = _criterios[i].second;
+    }
+  }
+}
