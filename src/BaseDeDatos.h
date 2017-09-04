@@ -8,7 +8,7 @@ typedef vector<Restriccion> Criterio;
 
 class BaseDeDatos {
 
-public: 
+public:
 
   /// @generador
 	BaseDeDatos(vector< pair<Tabla,string> > v);
