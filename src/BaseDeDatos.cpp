@@ -6,7 +6,7 @@ BaseDeDatos::BaseDeDatos (vector<pair<Tabla,string> > tablas)
 
 void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
   bool esta = false;
-  for(int i = 0; i < tablas().size(); i++){
+  for(unsigned int i = 0; i < tablas().size(); i++){
     if(T == tablas()[i]) 
       esta = true;
   }
