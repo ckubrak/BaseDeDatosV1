@@ -1,3 +1,6 @@
+# 1.3 [2017-09-04]
+- Error en el resultado final de compilar usando las instrucciones de README.md
+
 # 1.2 [2017-08-31]
 ## Enunciado
 - Agregado de ejemplo y aclaración de criterio de búsqueda
