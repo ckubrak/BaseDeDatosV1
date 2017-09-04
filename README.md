@@ -15,7 +15,7 @@ utilizando directamente `git` o alternativamente bajando el proyecto como un
 1. mkdir build && cd build
 2. cmake ..
 3. make
-4. ./tests/correrTests
+4. ./correrTests
 
 Para volver a compilar, simplemente correr "make" de nuevo.
 
