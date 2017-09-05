@@ -34,16 +34,16 @@ public:
   /// @otra operacion
 	int cantidadDeUsos(Criterio c) const;//L
 
-	int maximoUso();//L
-
 	vector<Criterio> criterios();//L
 
+	vector<pair<Criterio, int> > criteriosConUsos() const;
+
+	vector<pair<Tabla,string>> tablasConNombres() const;
 
 private:
 
 	vector<pair<Criterio, int> > _criterios;
 	vector<pair<Tabla,string>> _tablas;
-	int _maximoUso;
 };
 
 
