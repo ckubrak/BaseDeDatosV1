@@ -40,6 +40,8 @@ public:
 
 	vector<pair<Tabla,string>> tablasConNombres() const;
 
+  void agregarCriterio (Criterio c);
+
 private:
 
 	vector<pair<Criterio, int> > _criterios;

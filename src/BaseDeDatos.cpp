@@ -88,6 +88,17 @@ vector<pair<Tabla,string> > BaseDeDatos::tablasConNombres() const{
   return _tablas;
 }
 
+void BaseDeDatos::agregarCriterio(Criterio c){
+  for (unsigned int i = 0; i < _criterios.size(); ++i){
+    if (c == _criterios[i].first){
+      _criterios[i].second++;
+      return;
+    } else {
+      _criterios.push_back(make_pair(c,1));
+    }
+  }
+}
+
 bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
   if (not seteq(bd1.tablasConNombres(), bd2.tablasConNombres() ))
       return false;
