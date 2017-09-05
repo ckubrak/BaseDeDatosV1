@@ -48,13 +48,6 @@ void BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
 
 vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
   vector<Criterio> masUsados;
-  /*for(int i = 0; i < criterios().size(); i++){
-    if(criterios()[i].second == maximoUso()){
-      masUsados.push_back(criterios()[i].first);
-    }
-  }
-  */
-
   masUsados.push_back(_criterios[0].first);
   int cantVeces = _criterios[0].second;
 
@@ -84,4 +77,26 @@ bool BaseDeDatos::insercionValida(const Tabla& T, Registro r){
     }
   }
   return true;
+}
+
+
+vector<pair<Criterio, int> > BaseDeDatos::criteriosConUsos() const{
+  return _criterios;
+}
+
+vector<pair<Tabla,string> > BaseDeDatos::tablasConNombres() const{
+  return _tablas;
+}
+
+bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
+  if (not seteq(bd1.tablasConNombres(), bd2.tablasConNombres() ))
+      return false;
+  if (not seteq(bd1.criteriosConUsos(), bd2.criteriosConUsos() ))
+    return false;
+  return true;
+}
+
+
+bool operator!=(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
+  return not (bd1==bd2);
 }
