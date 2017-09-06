@@ -17,6 +17,14 @@ void BaseDeDatos::agregarENTabla(Tabla& T, Registro r){
   if(insercionValida(T,r)) T.agregarRegistro(r);
 }
 
+vector<string> BaseDeDatos::nombresDeLasTablas() const{
+  vector<string> nombres;
+  for (unsigned int i = 0; i < _tablas.size(); i++){
+    nombres.push_back(_tablas[i].second);
+  }
+  return nombres;
+}
+
 vector<Criterio> BaseDeDatos::criterios(){
   vector<Criterio> resultado;
   for (unsigned int i = 0; i < _criterios.size(); i++){
@@ -80,14 +88,6 @@ bool BaseDeDatos::insercionValida(const Tabla& T, Registro r){
 }
 
 
-vector<pair<Criterio, int> > BaseDeDatos::criteriosConUsos() const{
-  return _criterios;
-}
-
-vector<pair<Tabla,string> > BaseDeDatos::tablasConNombres() const{
-  return _tablas;
-}
-
 void BaseDeDatos::agregarCriterio(Criterio c){
   for (unsigned int i = 0; i < _criterios.size(); ++i){
     if (c == _criterios[i].first){
@@ -100,9 +100,9 @@ void BaseDeDatos::agregarCriterio(Criterio c){
 }
 
 bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
-  if (not seteq(bd1.tablasConNombres(), bd2.tablasConNombres() ))
+  if (not seteq(bd1._tablas, bd2._tablas ))
       return false;
-  if (not seteq(bd1.criteriosConUsos(), bd2.criteriosConUsos() ))
+  if (not seteq(bd1._criterios, bd2._criterios ))
     return false;
   return true;
 }

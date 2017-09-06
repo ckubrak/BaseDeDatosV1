@@ -11,10 +11,10 @@ class BaseDeDatos {
 public:
 
   /// @generador
-	BaseDeDatos(vector< pair<Tabla,string> > v);//L
+	BaseDeDatos(vector< pair<Tabla,string> > v);//T
 
   /// @generador
-	void agregarTabla(const Tabla& T, string nombre);//L
+	void agregarTabla(const Tabla& T, string nombre);//T
 
   /// @generador @otra op
 	void agregarENTabla(Tabla& T, Registro r);//L
@@ -36,11 +36,11 @@ public:
 
 	vector<Criterio> criterios();//L
 
-	vector<pair<Criterio, int> > criteriosConUsos() const;
+  void agregarCriterio (Criterio c); //L
 
-	vector<pair<Tabla,string>> tablasConNombres() const;
+  vector<string> nombresDeLasTablas() const;
 
-  void agregarCriterio (Criterio c);
+  friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
 private:
 
@@ -49,7 +49,6 @@ private:
 };
 
 
-bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 bool operator!=(const BaseDeDatos&, const BaseDeDatos&);
 
 
