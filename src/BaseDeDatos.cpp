@@ -118,15 +118,15 @@ bool operator!=(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
   return not (bd1==bd2);
 }
 
-Tabla busqueda(string nombre, Criterio c , bool b){
+Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
 	for (unsigned int i = 0; i < _tablas.size(); ++i){
   		if(nombre == _tablas[i].second){
-	  		Tabla t = filtrar(_tablas[i], c, b);
+	  		Tabla t = filtrar(_tablas[i].first, c, b);
   			return t;
   		}
   	}
 }
 
-Tabla filtrar(Tabla t, Criterio c, bool b){
-	
+Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const {
+	return t;
 }
