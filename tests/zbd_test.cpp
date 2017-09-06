@@ -41,12 +41,12 @@ TEST(Zbd_test,agregarTabla){
   EXPECT_EQ(bdtest,bd2);
 }
 
-// TEST(Zbd_test, agregarRegistro){
-//   vector<string> campos = {"LU", "Año", "Nombre", "Carrera"};
-//   Registro r1(campos, {datoNat(181), datoNat(2017), datoStr("March"), datoStr("Comp")});
-//   BaseDeDatos bdtest = bd;
-//   EXPECT_EQ(bdtest.tablas()[0].registros().size(), 0);
-//   bdtest.agregarENTabla(t, r1);
-//   EXPECT_EQ(bdtest.tablas()[0].registros().size(), 1);
+ TEST(Zbd_test, agregarENTabla){
+   vector<string> campos = {"LU", "Año", "Nombre", "Carrera"};
+   Registro r1(campos, {datoNat(181), datoNat(2017), datoStr("March"), datoStr("Comp")});
+   BaseDeDatos bdtest = bd;
+   EXPECT_EQ(bdtest.tablas()[0].registros().size(), 0);
+   bdtest.agregarENTabla("Alumnos", r1);
+   EXPECT_EQ(bdtest.tablas()[0].registros().size(), 1);
 
-// }
+ }

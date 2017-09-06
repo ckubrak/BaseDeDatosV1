@@ -42,6 +42,10 @@ public:
 
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
+  Tabla	busqueda(string nombre)const;
+
+  Tabla filtrar(Tabla t, Criterio c, bool b);
+
 private:
 
 	vector<pair<Criterio, int> > _criterios;

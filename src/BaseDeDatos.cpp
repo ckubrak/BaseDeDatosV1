@@ -12,17 +12,20 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
 }
 
 void BaseDeDatos::agregarENTabla(string nombre, Registro r){
-  if(pertenece(nombre, nombresDeLasTablas()))
+/*  if(pertenece(nombre, nombresDeLasTablas())){
+
+  }
   	return ;
   Tabla t({ "LU", "Año", "Nombre", "Carrera" },
             {"LU", "Año"},
-            {datoNat(0), datoNat(0), datoStr(""), datoStr("")});
+            {datoNat(0), datoNat(0), datoStr(""), datoStr("")});*/
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
-  		t = _tablas[i].first;
+	  if(insercionValida(_tablas[i].first,r)) {
+	  	_tablas[i].first.agregarRegistro(r);  	
+	  }
   	}
   }
-  if(insercionValida(t,r)) t.agregarRegistro(r);
 }
 
 vector<string> BaseDeDatos::nombresDeLasTablas() const{
@@ -120,4 +123,17 @@ bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
 
 bool operator!=(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
   return not (bd1==bd2);
+}
+
+Tabla busqueda(string nombre, Criterio c , bool b){
+	for (unsigned int i = 0; i < _tablas.size(); ++i){
+  		if(nombre == _tablas[i].second){
+	  		Tabla t = filtrar(_tablas[i], c, b);
+  			return t;
+  		}
+  	}
+}
+
+Tabla filtrar(Tabla t, Criterio c, bool b){
+	
 }
