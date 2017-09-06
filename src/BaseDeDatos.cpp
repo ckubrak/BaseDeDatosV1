@@ -100,6 +100,8 @@ void BaseDeDatos::agregarCriterio(Criterio c){
 }
 
 bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
+  if (not seteq(bd1.nombresDeLasTablas(), bd2.nombresDeLasTablas() ))
+    return false;
   if (not seteq(bd1._tablas, bd2._tablas ))
       return false;
   if (not seteq(bd1._criterios, bd2._criterios ))
