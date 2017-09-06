@@ -11,8 +11,18 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
   }
 }
 
-void BaseDeDatos::agregarENTabla(string nombre,Tabla& T, Registro r){
-  if(insercionValida(T,r)) T.agregarRegistro(r);
+void BaseDeDatos::agregarENTabla(string nombre, Registro r){
+  if(pertenece(nombre, nombresDeLasTablas()))
+  	return ;
+  Tabla t({ "LU", "Año", "Nombre", "Carrera" },
+            {"LU", "Año"},
+            {datoNat(0), datoNat(0), datoStr(""), datoStr("")});
+  for (unsigned int i = 0; i < _tablas.size(); ++i){
+  	if(nombre == _tablas[i].second){
+  		t = _tablas[i].first;
+  	}
+  }
+  if(insercionValida(t,r)) t.agregarRegistro(r);
 }
 
 vector<string> BaseDeDatos::nombresDeLasTablas() const{
@@ -73,11 +83,11 @@ vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
 
 bool BaseDeDatos::insercionValida(const Tabla& T, Registro r){
   if(!seteq(T.campos(), r.campos())) return false;
-  vector<string> claves = T.claves();
+  vector<string> campos = T.campos();
   vector<Registro> registros = T.registros();
-  for(unsigned int i = 0; i < claves.size(); i++){
+  for(unsigned int i = 0; i < campos.size(); i++){
     for(unsigned int j = 0; j < registros.size(); j++){
-      if(registros[j].dato(claves[i]) == r.dato(claves[i])){
+      if(registros[j].dato(campos[i]) == r.dato(campos[i])){
         return false;
       }
     }
