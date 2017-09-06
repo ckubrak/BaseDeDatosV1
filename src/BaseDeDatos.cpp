@@ -5,12 +5,10 @@ BaseDeDatos::BaseDeDatos (vector<pair<Tabla,string> > tablas)
   : _tablas(tablas) {};
 
 void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
-  bool esta = false;
   for(unsigned int i = 0; i < tablas().size(); i++){
-    if(T == tablas()[i]) 
-      esta = true;
+    if(!pertenece(nombre, nombresDeLasTablas()))
+      _tablas.push_back(make_pair(T, nombre));
   }
-  if(!esta) _tablas.push_back(make_pair(T, nombre));
 }
 
 void BaseDeDatos::agregarENTabla(Tabla& T, Registro r){
