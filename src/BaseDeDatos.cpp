@@ -12,18 +12,11 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
 }
 
 void BaseDeDatos::agregarENTabla(string nombre, Registro r){
-/*  if(pertenece(nombre, nombresDeLasTablas())){
-
-  }
-  	return ;
-  Tabla t({ "LU", "Año", "Nombre", "Carrera" },
-            {"LU", "Año"},
-            {datoNat(0), datoNat(0), datoStr(""), datoStr("")});*/
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
-	  if(insercionValida(_tablas[i].first,r)) {
-	  	_tablas[i].first.agregarRegistro(r);  	
-	  }
+      if(insercionValida(_tablas[i].first,r)) {
+        _tablas[i].first.agregarRegistro(r);  	
+      }
   	}
   }
 }
