@@ -17,13 +17,13 @@ public:
 	void agregarTabla(const Tabla& T, string nombre);//T
 
   /// @generador @otra op
-	void agregarENTabla(Tabla& T, Registro r);//L
+	void agregarENTabla(string nombre, Registro r);//L
 
   /// @otra operacion
 	bool insercionValida(const Tabla& T, Registro r);//L
 
   /// @otra operacion
-	void criterioValido(const Tabla& T, Criterio c) const;
+	bool criterioValido(const Tabla& T, Criterio c) const;
 
   /// @otra operacion
 	vector<Criterio> criteriosMasUsado() const;//L

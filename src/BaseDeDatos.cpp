@@ -11,7 +11,7 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
   }
 }
 
-void BaseDeDatos::agregarENTabla(Tabla& T, Registro r){
+void BaseDeDatos::agregarENTabla(string nombre,Tabla& T, Registro r){
   if(insercionValida(T,r)) T.agregarRegistro(r);
 }
 
@@ -48,8 +48,8 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   return 0;
 }
 
-void BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
-  
+bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
+  return true;
 }
 
 vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
