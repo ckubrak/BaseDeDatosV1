@@ -42,11 +42,15 @@ public:
 
   vector<string> nombresDeLasTablas() const;
 
+  Tabla crearTabla(const Tabla t, const vector<string> campos, const vector<string> claves) const;
+
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
   Tabla busqueda(string nombre, Criterio c, bool b) const;
 
   Tabla filtrar(Tabla t, Criterio c, bool b) const;
+
+  bool coincide( Registro r,  Criterio c) const;
 
 private:
 

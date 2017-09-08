@@ -124,28 +124,40 @@ bool operator!=(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
 }
 
 
-//filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
-Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
-	if(criterioValido(t,c)){
-		vector<Dato> tipos;
+Tabla BaseDeDatos::crearTabla(const Tabla t, const vector<string> campos, const vector<string> claves) const{
+	vector<Dato> tipos;
 		for(unsigned int k = 0; k <t.campos().size(); k++){
 			vector<string> tCampos = t.campos();
 			tipos.push_back(t.tipoCampo(tCampos[k]));
 		}
-		Tabla tNueva = Tabla(t.campos(),t.claves(),tipos);
-		/*
-		for(int i = 0; i < t.campos().size(); i++){
-			for(int j = 0; j < c.size(); j++){
-				d.esNat() != r.valor().esNat()
-				if(t.campos()[i] == c[j].campo() && t.tipoCampo(t.campos()[i]).esNat() == c[j].valor().esNat() && t.tipoCampo(t.campos()[i]) == c[j].valor() && b){
-					//si b es true entonces los agregra
-				}else{
+	Tabla tNueva = Tabla(campos,claves,tipos);
+	return tNueva;
+}
 
-				}
+//filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
+Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
+	if(criterioValido(t,c)){
+		Tabla tNueva = crearTabla(t,t.campos(),t.claves());		
+		for(int i = 0; i < t.campos().size(); i++){
+			Registro r = t.registros()[i];
+			if(b && coincide(r,c)){
+				tNueva.agregarRegistro(r);
+			}else if(!b && !coincide(r,c)){
+				tNueva.agregarRegistro(r);
 			}
-		}*/
+		}		
 	}
 }
+
+bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
+	for(int i = 0; i < c.size(); i++){
+		if(!(r.dato(c[i].campo()) == c[i].valor())){
+			return false;
+		}
+	}
+	return true;
+}
+
 
 
 Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
