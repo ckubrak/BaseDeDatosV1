@@ -67,5 +67,9 @@ TEST(Zbd_test, nombresDeLasTalas){
 TEST(Zbd_test, tablas){
   BaseDeDatos bdtest = bd;
   vector<Tabla> tablasTest {t};
-  EXPECT_TRUE(seteq(bd.tablas(),tablasTest));
+  EXPECT_TRUE(seteq(bdtest.tablas(),tablasTest));
+  tablasTest.push_back(t2);
+  bdtest.agregarTabla(t2, "Carreras");
+  EXPECT_TRUE(seteq(bdtest.tablas(),tablasTest));
+  EXPECT_FALSE(seteq(bd.tablas(),tablasTest));
 }
