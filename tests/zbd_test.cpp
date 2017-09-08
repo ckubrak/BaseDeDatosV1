@@ -63,3 +63,9 @@ TEST(Zbd_test, nombresDeLasTalas){
   nombres.push_back("Carreras");
   EXPECT_EQ(bdtest.nombresDeLasTablas(),nombres);
 }
+
+TEST(Zbd_test, tablas){
+  BaseDeDatos bdtest = bd;
+  vector<Tabla> tablasTest {t};
+  EXPECT_TRUE(seteq(bd.tablas(),tablasTest));
+}
