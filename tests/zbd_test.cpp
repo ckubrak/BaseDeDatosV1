@@ -135,6 +135,10 @@ TEST(Zbd_test, cantidadDeUsos){
   bdtest.agregarCriterio(dobleAlReves);
   EXPECT_EQ(bdtest.cantidadDeUsos(dobleAlReves), 1);
   EXPECT_TRUE(pertenece(criterio,bdtest.criteriosMasUsado()));
+
+  bdtest.agregarCriterio(dobleAlReves);
+  EXPECT_TRUE(pertenece(criterio,bdtest.criteriosMasUsado()));
+  EXPECT_TRUE(pertenece(dobleAlReves,bdtest.criteriosMasUsado()));
 }
 
 TEST(Zbd_test, criterioMasUsado){
