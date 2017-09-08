@@ -34,7 +34,10 @@ public:
   /// @otra operacion
 	int cantidadDeUsos(Criterio c) const;//L
 
-	vector<Criterio> criterios();//L
+  /// @otra operacion 
+  bool registroValido(const string campo, const Dato d, Restriccion r) const;
+
+	vector<Criterio> criterios() const;//L
 
   void agregarCriterio (Criterio c); //L
 
@@ -42,9 +45,9 @@ public:
 
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
-  Tabla	busqueda(string nombre)const;
+  Tabla	busqueda(string nombre, Criterio c , bool b) const;
 
-  Tabla filtrar(Tabla t, Criterio c, bool b);
+  Tabla filtrar(Tabla t, Criterio c, bool b) const;
 
 private:
 

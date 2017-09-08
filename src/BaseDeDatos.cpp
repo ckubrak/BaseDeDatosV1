@@ -12,13 +12,6 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
 }
 
 void BaseDeDatos::agregarENTabla(string nombre, Registro r){
-/*  if(pertenece(nombre, nombresDeLasTablas())){
-
-  }
-  	return ;
-  Tabla t({ "LU", "Año", "Nombre", "Carrera" },
-            {"LU", "Año"},
-            {datoNat(0), datoNat(0), datoStr(""), datoStr("")});*/
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
 	  if(insercionValida(_tablas[i].first,r)) {
@@ -36,7 +29,7 @@ vector<string> BaseDeDatos::nombresDeLasTablas() const{
   return nombres;
 }
 
-vector<Criterio> BaseDeDatos::criterios(){
+vector<Criterio> BaseDeDatos::criterios() const{
   vector<Criterio> resultado;
   for (unsigned int i = 0; i < _criterios.size(); i++){
       resultado.push_back(_criterios[i].first);
@@ -61,7 +54,21 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   return 0;
 }
 
+bool BaseDeDatos::registroValido(const string campo, const Dato d, Restriccion r) const{
+	if(campo != r.campo() || d.esNat() != r.valor().esNat()){
+		return false;
+	}
+	return true;
+}
+
 bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
+  for(int i = 0; i < T.campos().size(); i++){
+  	for(int j = 0; j < c.size(); j++){
+  		if(!registroValido(T.campos()[i], T.tipoCampo(T.campos()[i]),c[j])){
+  			return false;
+  		}
+  	}
+  }
   return true;
 }
 
@@ -125,15 +132,36 @@ bool operator!=(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
   return not (bd1==bd2);
 }
 
-Tabla busqueda(string nombre, Criterio c , bool b){
+
+//filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
+Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
+	if(criterioValido(t,c)){
+		vector<Dato> tipos;
+		for(unsigned int k = 0; k <t.campos().size(); k++){
+			vector<string> tCampos = t.campos();
+			tipos.push_back(t.tipoCampo(tCampos[k]));
+		}
+		Tabla tNueva = Tabla(t.campos(),t.claves(),tipos);
+		/*
+		for(int i = 0; i < t.campos().size(); i++){
+			for(int j = 0; j < c.size(); j++){
+				d.esNat() != r.valor().esNat()
+				if(t.campos()[i] == c[j].campo() && t.tipoCampo(t.campos()[i]).esNat() == c[j].valor().esNat() && t.tipoCampo(t.campos()[i]) == c[j].valor() && b){
+					//si b es true entonces los agregra
+				}else{
+
+				}
+			}
+		}*/
+	}
+}
+
+
+Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
 	for (unsigned int i = 0; i < _tablas.size(); ++i){
   		if(nombre == _tablas[i].second){
-	  		Tabla t = filtrar(_tablas[i], c, b);
+	  		Tabla t = filtrar(_tablas[i].first, c, b);
   			return t;
   		}
   	}
-}
-
-Tabla filtrar(Tabla t, Criterio c, bool b){
-	
 }
