@@ -111,11 +111,14 @@ TEST(Zbd_test, cantidadDeUsos){
   Criterio criterio = {lu};
   EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 0);
 
+
   bdtest.agregarCriterio(criterio);
   EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 1);
+  EXPECT_TRUE(pertenece(criterio,bdtest.criteriosMasUsado()));
 
   bdtest.agregarCriterio(criterio);
   EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 2);
+  EXPECT_TRUE(pertenece(criterio,bdtest.criteriosMasUsado()));
 
   Dato name = Dato (9,"Cristian",true); //LU nat 5
   Restriccion nombre  = Restriccion("Nombre", name, true);
@@ -131,6 +134,7 @@ TEST(Zbd_test, cantidadDeUsos){
   Criterio dobleAlReves = {lu, nombre};
   bdtest.agregarCriterio(dobleAlReves);
   EXPECT_EQ(bdtest.cantidadDeUsos(dobleAlReves), 1);
+  EXPECT_TRUE(pertenece(criterio,bdtest.criteriosMasUsado()));
 }
 
 TEST(Zbd_test, criterioMasUsado){
