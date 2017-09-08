@@ -111,10 +111,9 @@ void BaseDeDatos::agregarCriterio(Criterio c){
     if (c == _criterios[i].first){
       _criterios[i].second++;
       return;
-    } else {
-      _criterios.push_back(make_pair(c,1));
     }
   }
+  _criterios.push_back(make_pair(c,1));
 }
 
 bool operator==(const BaseDeDatos& bd1, const BaseDeDatos& bd2){
