@@ -35,7 +35,7 @@ public:
 	int cantidadDeUsos(Criterio c) const;//L
 
   /// @otra operacion 
-  bool registroValido(const string campo, const Dato d, Restriccion r) const;
+  bool restriccionValida(const string campo, const Dato d, Restriccion r) const;
 
 	vector<Criterio> criterios() const;//L
 
