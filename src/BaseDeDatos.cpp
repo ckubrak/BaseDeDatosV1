@@ -135,8 +135,9 @@ Tabla BaseDeDatos::crearTabla(const Tabla t, const vector<string> campos, const 
 }
 
 //filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
-Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
+Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b){
 	if(criterioValido(t,c)){
+    agregarCriterio(c);
 		Tabla tNueva = crearTabla(t,t.campos(),t.claves());		
 		for(int i = 0; i < t.campos().size(); i++){
 			Registro r = t.registros()[i];
@@ -146,10 +147,11 @@ Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
 				tNueva.agregarRegistro(r);
 			}
 		}		
-	}
+    return tNueva;
+  }
 }
 
-bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
+bool BaseDeDatos::coincide(const Registro r, const Criterio c) {
 	for(int i = 0; i < c.size(); i++){
 		if(!(r.dato(c[i].campo()) == c[i].valor())){
 			return false;
@@ -160,7 +162,7 @@ bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
 
 
 
-Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
+Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) {
 	for (unsigned int i = 0; i < _tablas.size(); ++i){
   		if(nombre == _tablas[i].second){
 	  		Tabla t = filtrar(_tablas[i].first, c, b);

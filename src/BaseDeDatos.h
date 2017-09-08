@@ -46,11 +46,11 @@ public:
 
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
-  Tabla busqueda(string nombre, Criterio c, bool b) const;
+  Tabla busqueda(string nombre, Criterio c, bool b) ;
 
-  Tabla filtrar(Tabla t, Criterio c, bool b) const;
+  Tabla filtrar(Tabla t, Criterio c, bool b);
 
-  bool coincide( Registro r,  Criterio c) const;
+  bool coincide( Registro r,  Criterio c) ;
 
 private:
 
