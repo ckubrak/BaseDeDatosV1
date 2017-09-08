@@ -77,4 +77,11 @@ TEST(Zbd_test, tablas){
 TEST(Zbd_test, agregarCriterio){
   BaseDeDatos bdtest = bd;
   EXPECT_EQ(bd.criterios().size(),0);
+  Dato numDni = Dato (5,"",true); //DNI nat 5
+  Restriccion dni = Restriccion("DNI", numDni, true);
+  Criterio criterio = {dni};
+  EXPECT_FALSE(pertenece(criterio,bdtest.criterios()));
+  bdtest.agregarCriterio(criterio);
+  EXPECT_TRUE(pertenece(criterio,bdtest.criterios()));
+
 }
