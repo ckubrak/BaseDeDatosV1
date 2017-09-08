@@ -54,20 +54,12 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   return 0;
 }
 
-bool BaseDeDatos::registroValido(const string campo, const Dato d, Restriccion r) const{
-	if(campo != r.campo() || d.esNat() != r.valor().esNat()){
-		return false;
-	}
-	return true;
-}
-
 bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
-  for(unsigned int i = 0; i < T.campos().size(); i++){
-  	for(unsigned int j = 0; j < c.size(); j++){
-  		if(!registroValido(T.campos()[i], T.tipoCampo(T.campos()[i]),c[j])){
-  			return false;
-  		}
-  	}
+  for(unsigned int j = 0; j < c.size(); j++){
+    if (!pertenece(c[j].campo(),T.campos()))
+      return false;
+    if (c[j].valor().esNat()!=T.tipoCampo(c[j].campo()).esNat())
+      return false;
   }
   return true;
 }
