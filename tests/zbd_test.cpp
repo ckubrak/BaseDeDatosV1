@@ -92,3 +92,53 @@ TEST(Zbd_test, criterioValido){
   Criterio criterio = {lu};
   EXPECT_TRUE(bdtest.criterioValido(t,criterio));
 }
+
+TEST(Zbd_test, criterios){
+  BaseDeDatos bdtest = bd;
+  EXPECT_EQ(bdtest.criterios().size(),0);
+  Dato numLU = Dato (5,"",true); //LU nat 5
+  Restriccion lu = Restriccion("LU", numLU, true);
+  Criterio criterio = {lu};
+  bdtest.agregarCriterio(criterio);
+  EXPECT_EQ(bdtest.criterios().size(),1);
+  EXPECT_EQ(bdtest.criterios()[0],criterio);
+}
+
+TEST(Zbd_test, cantidadDeUsos){
+  BaseDeDatos bdtest = bd;
+  Dato numLU = Dato (5,"",true); //LU nat 5
+  Restriccion lu = Restriccion("LU", numLU, true);
+  Criterio criterio = {lu};
+  EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 0);
+
+  bdtest.agregarCriterio(criterio);
+  EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 1);
+
+  bdtest.agregarCriterio(criterio);
+  EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 2);
+
+  Dato name = Dato (9,"Cristian",true); //LU nat 5
+  Restriccion nombre  = Restriccion("Nombre", name, true);
+  Criterio nom = {nombre};
+  EXPECT_EQ(bdtest.cantidadDeUsos(nom), 0);
+  bdtest.agregarCriterio(nom);
+  EXPECT_EQ(bdtest.cantidadDeUsos(criterio), 2);
+  EXPECT_EQ(bdtest.cantidadDeUsos(nom), 1);
+
+  Criterio doble = {nombre, lu};
+  bdtest.agregarCriterio(doble);
+  EXPECT_EQ(bdtest.cantidadDeUsos(doble), 1);
+  Criterio dobleAlReves = {lu, nombre};
+  bdtest.agregarCriterio(dobleAlReves);
+  EXPECT_EQ(bdtest.cantidadDeUsos(dobleAlReves), 1);
+}
+
+TEST(Zbd_test, criterioMasUsado){
+}
+
+TEST(Zbd_test, insercionValida){
+}
+
+TEST(Zbd_test, busqueda){
+
+}
