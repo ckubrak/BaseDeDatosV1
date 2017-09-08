@@ -14,9 +14,9 @@ void BaseDeDatos::agregarTabla(const Tabla &T, string nombre){
 void BaseDeDatos::agregarENTabla(string nombre, Registro r){
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
-	  if(insercionValida(_tablas[i].first,r)) {
-	  	_tablas[i].first.agregarRegistro(r);  	
-	  }
+      if(insercionValida(_tablas[i].first,r)) {
+        _tablas[i].first.agregarRegistro(r);  	
+      }
   	}
   }
 }
@@ -165,3 +165,10 @@ Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
   		}
   	}
 }
+
+
+
+
+
+
+
