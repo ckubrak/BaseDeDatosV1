@@ -73,3 +73,8 @@ TEST(Zbd_test, tablas){
   EXPECT_TRUE(seteq(bdtest.tablas(),tablasTest));
   EXPECT_FALSE(seteq(bd.tablas(),tablasTest));
 }
+
+TEST(Zbd_test, agregarCriterio){
+  BaseDeDatos bdtest = bd;
+  EXPECT_EQ(bd.criterios().size(),0);
+}
