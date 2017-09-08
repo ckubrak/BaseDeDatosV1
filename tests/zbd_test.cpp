@@ -83,5 +83,12 @@ TEST(Zbd_test, agregarCriterio){
   EXPECT_FALSE(pertenece(criterio,bdtest.criterios()));
   bdtest.agregarCriterio(criterio);
   EXPECT_TRUE(pertenece(criterio,bdtest.criterios()));
+}
 
+TEST(Zbd_test, criterioValido){
+  BaseDeDatos bdtest = bd;
+  Dato numLU = Dato (5,"",true); //LU nat 5
+  Restriccion lu = Restriccion("LU", numLU, true);
+  Criterio criterio = {lu};
+  EXPECT_TRUE(bdtest.criterioValido(t,criterio));
 }
