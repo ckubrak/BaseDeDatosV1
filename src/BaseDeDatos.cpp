@@ -65,21 +65,21 @@ bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
 }
 
 vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
+  Criterio base = _criterios[0].first;
   vector<Criterio> masUsados;
-  masUsados.push_back(_criterios[0].first);
+  masUsados.push_back(base);
   int cantVeces = _criterios[0].second;
 
   for (unsigned int i = 0; i < _criterios.size(); ++i){
-    if (_criterios[i].second == cantVeces)
-      masUsados.push_back(_criterios[i].first);
-
     if (_criterios[i].second > cantVeces){
       masUsados.clear();
       masUsados.push_back(_criterios[i].first);
       cantVeces = _criterios[i].second;
     }
+    if (_criterios[i].second == cantVeces)
+      masUsados.push_back(_criterios[i].first);
   }
-
+  return masUsados;
 }
 
 
