@@ -62,8 +62,8 @@ bool BaseDeDatos::registroValido(const string campo, const Dato d, Restriccion r
 }
 
 bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
-  for(int i = 0; i < T.campos().size(); i++){
-  	for(int j = 0; j < c.size(); j++){
+  for(unsigned int i = 0; i < T.campos().size(); i++){
+  	for(unsigned int j = 0; j < c.size(); j++){
   		if(!registroValido(T.campos()[i], T.tipoCampo(T.campos()[i]),c[j])){
   			return false;
   		}
