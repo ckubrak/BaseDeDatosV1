@@ -141,9 +141,6 @@ TEST(Zbd_test, cantidadDeUsos){
   EXPECT_TRUE(pertenece(dobleAlReves,bdtest.criteriosMasUsado()));
 }
 
-TEST(Zbd_test, criterioMasUsado){
-}
-
 TEST(Zbd_test, insercionValida){
 }
 
