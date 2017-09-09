@@ -15,7 +15,7 @@ void BaseDeDatos::agregarENTabla(string nombre, Registro r){
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
       if(insercionValida(_tablas[i].first,r)) {
-        _tablas[i].first.agregarRegistro(r);  	
+        _tablas[i].first.agregarRegistro(r);
       }
   	}
   }
@@ -138,8 +138,8 @@ Tabla BaseDeDatos::crearTabla(const Tabla t, const vector<string> campos, const 
 //filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
 Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
 	if(criterioValido(t,c)){
-		Tabla tNueva = crearTabla(t,t.campos(),t.claves());		
-		for(int i = 0; i < t.registros().size(); i++){
+		Tabla tNueva = crearTabla(t,t.campos(),t.claves());
+		for(unsigned int i = 0; i < t.registros().size(); i++){
 			Registro r = t.registros()[i];
 			if(b == true && coincide(r,c)){
 				tNueva.agregarRegistro(r);
@@ -147,25 +147,18 @@ Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
 				tNueva.agregarRegistro(r);
 			}
 		}
-		return tNueva;	
+		return tNueva;
 	}
 }
 
 bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
-	for(int i = 0; i < c.size(); i++){
-		for(int j = 0; j < r.campos().size(); j++){
-			//bool camposIguales = c[i].campo() == r.campos()[j];
+	for(unsigned int i = 0; i < c.size(); i++){
+		for(unsigned int j = 0; j < r.campos().size(); j++){
 			bool tiposIguales = r.dato(c[i].campo()).esNat() == c[i].valor().esNat();
 			bool mismoValor = r.dato(c[i].campo()) == c[i].valor();
 			if(!tiposIguales || !mismoValor){
 				return false;
 			}
-		/*	if(c[i].campo() == r.campos()[j] ){
-				return false;
-			}
-			if(r.dato(c[i].campo()).esNat() != c[i].valor().esNat() ){
-				return false;
-			}*/
 		}
 	}
 	return true;
