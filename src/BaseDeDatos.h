@@ -38,6 +38,8 @@ public:
 
 	vector<Criterio> criterios() const;//L
 
+
+  // existe tabla a la que se le aplica el criterio, y(luego) criteriovalido para la bd, tabla y criterio
   void agregarCriterio (Criterio c); //L
 
   vector<string> nombresDeLasTablas() const;
@@ -46,11 +48,13 @@ public:
 
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
-  Tabla busqueda(string nombre, Criterio c, bool b) ;
+  Tabla busqueda(string nombre, Criterio c, bool b) const;
 
-  Tabla filtrar(Tabla t, Criterio c, bool b);
+  Tabla filtrar(Tabla t, Criterio c, bool b) const;
 
-  bool coincide( Registro r,  Criterio c) ;
+  bool coincide( Registro r,  Criterio c) const;
+
+  Tabla tablaCorrespondiente(string nombre)const;
 
 private:
 

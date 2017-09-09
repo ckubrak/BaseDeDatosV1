@@ -54,6 +54,7 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   return 0;
 }
 
+
 bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
   for(unsigned int j = 0; j < c.size(); j++){
     if (!pertenece(c[j].campo(),T.campos()))
@@ -65,21 +66,21 @@ bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
 }
 
 vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
-  Criterio base = _criterios[0].first;
   vector<Criterio> masUsados;
-  masUsados.push_back(base);
+  masUsados.push_back(_criterios[0].first);
   int cantVeces = _criterios[0].second;
 
   for (unsigned int i = 0; i < _criterios.size(); ++i){
+    if (_criterios[i].second == cantVeces)
+      masUsados.push_back(_criterios[i].first);
+
     if (_criterios[i].second > cantVeces){
       masUsados.clear();
       masUsados.push_back(_criterios[i].first);
       cantVeces = _criterios[i].second;
     }
-    if (_criterios[i].second == cantVeces)
-      masUsados.push_back(_criterios[i].first);
   }
-  return masUsados;
+
 }
 
 
@@ -135,26 +136,36 @@ Tabla BaseDeDatos::crearTabla(const Tabla t, const vector<string> campos, const 
 }
 
 //filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
-Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b){
+Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
 	if(criterioValido(t,c)){
-    agregarCriterio(c);
 		Tabla tNueva = crearTabla(t,t.campos(),t.claves());		
-		for(int i = 0; i < t.campos().size(); i++){
+		for(int i = 0; i < t.registros().size(); i++){
 			Registro r = t.registros()[i];
-			if(b && coincide(r,c)){
+			if(b == true && coincide(r,c)){
 				tNueva.agregarRegistro(r);
-			}else if(!b && !coincide(r,c)){
+			}else if(b == false && !coincide(r,c)){
 				tNueva.agregarRegistro(r);
 			}
-		}		
-    return tNueva;
-  }
+		}
+		return tNueva;	
+	}
 }
 
-bool BaseDeDatos::coincide(const Registro r, const Criterio c) {
+bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
 	for(int i = 0; i < c.size(); i++){
-		if(!(r.dato(c[i].campo()) == c[i].valor())){
-			return false;
+		for(int j = 0; j < r.campos().size(); j++){
+			//bool camposIguales = c[i].campo() == r.campos()[j];
+			bool tiposIguales = r.dato(c[i].campo()).esNat() == c[i].valor().esNat();
+			bool mismoValor = r.dato(c[i].campo()) == c[i].valor();
+			if(!tiposIguales || !mismoValor){
+				return false;
+			}
+		/*	if(c[i].campo() == r.campos()[j] ){
+				return false;
+			}
+			if(r.dato(c[i].campo()).esNat() != c[i].valor().esNat() ){
+				return false;
+			}*/
 		}
 	}
 	return true;
@@ -162,7 +173,7 @@ bool BaseDeDatos::coincide(const Registro r, const Criterio c) {
 
 
 
-Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) {
+Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
 	for (unsigned int i = 0; i < _tablas.size(); ++i){
   		if(nombre == _tablas[i].second){
 	  		Tabla t = filtrar(_tablas[i].first, c, b);
@@ -174,6 +185,12 @@ Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) {
 
 
 
-
+Tabla BaseDeDatos::tablaCorrespondiente(string nombre)const{
+	for(unsigned int i = 0; i < _tablas.size(); ++i){
+		if(_tablas[i].second == nombre){
+			return _tablas[i].first;
+		}
+	}
+}
 
 
