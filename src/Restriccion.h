@@ -3,11 +3,6 @@
 
 #include "Dato.h"
 
-//
-
-//typedef typename vector<Restriccion> Criterio;
-
-//template<class T>
 
 class Restriccion {
  public:
