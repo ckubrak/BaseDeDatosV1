@@ -75,9 +75,8 @@ Criterio criterioVacio = {};
 TEST(Zbd_test,crear){
 
   Tabla t({ "LU", "Año", "Nombre", "Carrera" },{"LU", "Año"},{datoNat(0), datoNat(0), datoStr(""), datoStr("")});
-  
   Tabla t2({ "Cod", "Carrera" },{"Cod"},{datoNat(0), datoStr("")});
-  
+
   BaseDeDatos bd ({make_pair( t2,"Alumnos")});
 }
 
@@ -190,17 +189,10 @@ TEST(Zbd_test, filtrar){
   bdtest.agregarENTabla("Carreras", regN17);
   bdtest.agregarENTabla("Carreras", regN18);
   EXPECT_NE(bdtest.tablaCorrespondiente("Carreras") , t2);
-  //bdtest.agregarTabla(tnueva, "CarrerasN");
-  //bdtest.agregarENTabla("CarrerasN", regN18);
-  //EXPECT_NE(t2 , tnueva);
   Tabla tFiltrada = bdtest.filtrar(bdtest.tablaCorrespondiente("Carreras"),criterioN1, true);
   int f =0;
-  //EXPECT_EQ(t2 ,t2);
   EXPECT_NE(tFiltrada , tnueva);
   EXPECT_NE(tFiltrada , t2);
- // EXPECT_EQ(t2 , tnueva);
-  //EXPECT_EQ(bdtest.tablas()[0].registros().size(), 1);
-  //EXPECT_EQ(bd,bd);
 }
 
 
