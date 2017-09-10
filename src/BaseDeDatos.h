@@ -16,7 +16,7 @@ public:
 	BaseDeDatos(vector< pair<Tabla,string> > v);//T
 
   /// @generador
-  /// @requiere sinRepetidos(second (v) ++ nombre)
+  /// @requiere sinRepetidos(nombresDeLasTablas() ++ nombre)
 	void agregarTabla(const Tabla& T, string nombre);//T
 
   /// @generador
