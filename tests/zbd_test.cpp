@@ -83,6 +83,9 @@ TEST(Zbd_test,crear){
 TEST(Zbd_test, igualdad){
   EXPECT_EQ(bd,bd);
   EXPECT_FALSE(bd == bd2);
+  BaseDeDatos bdtest = bd2;
+  EXPECT_EQ(bdtest,bd2);
+  EXPECT_NE(bdtest,bd);
 }
 
 TEST(Zbd_test,agregarTabla){
@@ -127,6 +130,7 @@ TEST(Zbd_test, nombresDeLasTalas){
   EXPECT_EQ(bdtest.nombresDeLasTablas(),nombres);
 }
 
+
 TEST(Zbd_test, tablas){
   BaseDeDatos bdtest = bd;
   vector<Tabla> tablasTest {t};
@@ -135,6 +139,17 @@ TEST(Zbd_test, tablas){
   bdtest.agregarTabla(t2, "Carreras");
   EXPECT_TRUE(seteq(bdtest.tablas(),tablasTest));
   EXPECT_FALSE(seteq(bd.tablas(),tablasTest));
+}
+
+TEST(Zbd_test, insercionValida){
+  BaseDeDatos bdtest = bd;
+  Tabla tablaTest = t2;
+  bdtest.agregarTabla(tablaTest, "Carreras");
+  EXPECT_FALSE(bdtest.insercionValida(tablaTest, reg7));
+  EXPECT_TRUE(bdtest.insercionValida(tablaTest, regN18));
+  bdtest.agregarENTabla("Carreras", regN18);
+  EXPECT_TRUE(bdtest.insercionValida(tablaTest, regN18));
+  EXPECT_FALSE(bdtest.insercionValida(bdtest.tablaCorrespondiente("Carreras"), regN18));
 }
 
 TEST(Zbd_test, agregarCriterio){
@@ -154,17 +169,16 @@ TEST(Zbd_test, agregarCriterio){
   //el criterio pertenece a la lista de criterio de la base de datos
   EXPECT_TRUE(pertenece(criterio,bdtest.criterios()));
 }
-
 TEST(Zbd_test, criterioValido){
   BaseDeDatos bdtest = bd;
-  //se crea un dato
-  Dato numLU = Dato (5,"",true); //LU nat 5
-  //se crea una restriccion
-  Restriccion lu = Restriccion("LU", numLU, true);
-  //se crea un criterio 
-  Criterio criterio = {lu};
-  //el criterio es valido para esa tabla
-  EXPECT_TRUE(bdtest.criterioValido(t,criterio));
+  Dato numLU = Dato (5,"",true);
+  Restriccion luv = Restriccion("LU", numLU, true);
+  Criterio criterioV = {luv};
+  EXPECT_TRUE(bdtest.criterioValido(t,criterioV));
+  Dato numLUN2 = Dato (8,"",true);
+  Restriccion restriccionF = Restriccion("Cod", numLUN1, true);
+  Criterio criterioF = {restriccionF};
+  EXPECT_FALSE(bdtest.criterioValido(t,criterioF));
 }
 
 TEST(Zbd_test, coinciden){
@@ -197,9 +211,8 @@ TEST(Zbd_test, filtrar){
 
 
 TEST(Zbd_test, busqueda){
-  bool b = false;
   BaseDeDatos bdtest = bd;
-    bdtest.agregarTabla(t2, "Carreras");
+  bdtest.agregarTabla(t2, "Carreras");
   //agrega en la tabla t2 el dato 5 
   bdtest.agregarENTabla("Carreras", regN17);
     //crea la tabla tnueva con los elementos de t2
@@ -207,11 +220,20 @@ TEST(Zbd_test, busqueda){
   //agrega tabla nueva
   bdtest.agregarTabla(tnueva, "CarrerasN");
   //busca en carreras filtrando con el criterioN2
-  Tabla tBusqueda1 = bdtest.busqueda("Carreras", criterioN1, b);
-  Tabla tBusqueda2 = bdtest.busqueda("Carreras", criterioN2, b);
-  Tabla tBusqueda3 = bdtest.busqueda("Carreras", criterioN1, b);
+  Tabla tBusqueda1 = bdtest.busqueda("Carreras", criterioN1, false);
+  EXPECT_TRUE(bdtest.criterios().size() == 1);
+  Tabla tBusqueda2 = bdtest.busqueda("Carreras", criterioN2, false);
+  EXPECT_TRUE(bdtest.criterios()[0] == criterioN1);
+  EXPECT_TRUE(bdtest.criterios().size() == 2);
+  EXPECT_TRUE(bdtest.criterios()[1] == criterioN2);
+  Tabla tBusqueda3 = bdtest.busqueda("Carreras", criterioN1, false);
+  EXPECT_TRUE(bdtest.cantidadDeUsos(criterioN1) == 2);
+  EXPECT_TRUE(bdtest.cantidadDeUsos(criterioN2) == 1);
   EXPECT_NE(tBusqueda1 , tBusqueda2);
   EXPECT_EQ(tBusqueda1, tBusqueda3);
+  vector<Criterio> criteriosB;
+  EXPECT_TRUE(pertenece(criterioN1 ,bdtest.criteriosMasUsado()));
+  EXPECT_FALSE(pertenece(criterioN2 ,bdtest.criteriosMasUsado()));
 }
 
 

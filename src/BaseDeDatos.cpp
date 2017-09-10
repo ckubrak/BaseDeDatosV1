@@ -15,7 +15,7 @@ void BaseDeDatos::agregarENTabla(string nombre, Registro r){
   for (unsigned int i = 0; i < _tablas.size(); ++i){
   	if(nombre == _tablas[i].second){
       if(insercionValida(_tablas[i].first,r)) {
-        _tablas[i].first.agregarRegistro(r);
+        _tablas[i].first.agregarRegistro(r);  	
       }
   	}
   }
@@ -54,7 +54,6 @@ int BaseDeDatos::cantidadDeUsos(Criterio c) const{
   return 0;
 }
 
-
 bool BaseDeDatos::criterioValido(const Tabla& T, Criterio c) const{
   for(unsigned int j = 0; j < c.size(); j++){
     if (!pertenece(c[j].campo(),T.campos()))
@@ -80,7 +79,7 @@ vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
       cantVeces = _criterios[i].second;
     }
   }
-
+  return masUsados;
 }
 
 
@@ -137,26 +136,35 @@ Tabla BaseDeDatos::crearTabla(const Tabla t, const vector<string> campos, const 
 
 //filtrar toma una tabla con un criterio y un bool y filtra segun la condicion
 Tabla BaseDeDatos::filtrar(Tabla t, Criterio c, bool b) const{
-  Tabla tNueva = crearTabla(t,t.campos(),t.claves());
-  for(unsigned int i = 0; i < t.registros().size(); i++){
-    Registro r = t.registros()[i];
-    if(b == true && coincide(r,c)){
-      tNueva.agregarRegistro(r);
-    }else if(b == false && !coincide(r,c)){
-      tNueva.agregarRegistro(r);
-    }
-  }
-  return tNueva;
+	if(criterioValido(t,c)){
+		Tabla tNueva = crearTabla(t,t.campos(),t.claves());		
+		for(int i = 0; i < t.registros().size(); i++){
+			Registro r = t.registros()[i];
+			if(b == true && coincide(r,c)){
+				tNueva.agregarRegistro(r);
+			}else if(b == false && !coincide(r,c)){
+				tNueva.agregarRegistro(r);
+			}
+		}
+		return tNueva;	
+	}
 }
 
 bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
-	for(unsigned int i = 0; i < c.size(); i++){
-		for(unsigned int j = 0; j < r.campos().size(); j++){
+	for(int i = 0; i < c.size(); i++){
+		for(int j = 0; j < r.campos().size(); j++){
+			//bool camposIguales = c[i].campo() == r.campos()[j];
 			bool tiposIguales = r.dato(c[i].campo()).esNat() == c[i].valor().esNat();
 			bool mismoValor = r.dato(c[i].campo()) == c[i].valor();
 			if(!tiposIguales || !mismoValor){
 				return false;
 			}
+		/*	if(c[i].campo() == r.campos()[j] ){
+				return false;
+			}
+			if(r.dato(c[i].campo()).esNat() != c[i].valor().esNat() ){
+				return false;
+			}*/
 		}
 	}
 	return true;
@@ -164,10 +172,11 @@ bool BaseDeDatos::coincide(const Registro r, const Criterio c) const{
 
 
 
-Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) const{
+Tabla BaseDeDatos::busqueda(string nombre, Criterio c , bool b) {
 	for (unsigned int i = 0; i < _tablas.size(); ++i){
   		if(nombre == _tablas[i].second){
 	  		Tabla t = filtrar(_tablas[i].first, c, b);
+	  		agregarCriterio(c);
   			return t;
   		}
   	}
