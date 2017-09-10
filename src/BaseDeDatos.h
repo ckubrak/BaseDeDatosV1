@@ -11,13 +11,42 @@ class BaseDeDatos {
 public:
 
   /// @generador
+  /// @requiere sinRepetidos(second (v))
+  // donde second es una funcion que arma un vector con los \pi_{2} del vector de pares v
 	BaseDeDatos(vector< pair<Tabla,string> > v);//T
 
   /// @generador
+  /// @requiere sinRepetidos(nombresDeLasTablas() ++ nombre)
 	void agregarTabla(const Tabla& T, string nombre);//T
 
-  /// @generador @otra op
+  /// @generador
+  /// @requiere pertenece(nombre,nombresDeLasTablas)
 	void agregarENTabla(string nombre, Registro r);//L
+
+  // existe tabla a la que se le aplica el criterio, y(luego) criteriovalido para la bd, tabla y criterio
+  /// @generador
+  void agregarCriterio (Criterio c); //L
+
+
+
+  /// @observador
+	vector<Tabla> tablas() const;//L
+
+  /// @observador
+	vector<Criterio> criterios() const;//L
+
+  /// @observador
+  vector<string> nombresDeLasTablas() const;
+
+  /// @observador
+	int cantidadDeUsos(Criterio c) const;//L
+
+  /// @observador
+  /// @requiere pertenece(nombre,nombresDeLasTablas) \yLuego criterioValido(tablaCorrespondiente(nombre),c)
+  Tabla busqueda(string nombre, Criterio c, bool b);
+
+
+
 
   /// @otra operacion
 	bool insercionValida(const Tabla& T, Registro r);//L
@@ -28,32 +57,22 @@ public:
   /// @otra operacion
 	vector<Criterio> criteriosMasUsado() const;//L
 
-  /// @observador
-	vector<Tabla> tablas() const;//L
-
   /// @otra operacion
-	int cantidadDeUsos(Criterio c) const;//L
-
-  /// @otra operacion 
-
-	vector<Criterio> criterios() const;//L
-
-
-  // existe tabla a la que se le aplica el criterio, y(luego) criteriovalido para la bd, tabla y criterio
-  void agregarCriterio (Criterio c); //L
-
-  vector<string> nombresDeLasTablas() const;
-
+  /// @requiere pertenece(campos,t.campos)
+  /// @requiere pertenece(claves,t.claves)
   Tabla crearTabla(const Tabla t, const vector<string> campos, const vector<string> claves) const;
 
   friend bool operator==(const BaseDeDatos&, const BaseDeDatos&);
 
-  Tabla busqueda(string nombre, Criterio c, bool b);
-
+  /// @otra operacion
+  /// @requiere criterioValido(t,c)
   Tabla filtrar(Tabla t, Criterio c, bool b) const;
 
+  /// @otra operacion
   bool coincide( Registro r,  Criterio c) const;
 
+  /// @otra operacion
+  /// @requiere pertenece(nombre,nombresDeLasTablas)
   Tabla tablaCorrespondiente(string nombre)const;
 
 private:
