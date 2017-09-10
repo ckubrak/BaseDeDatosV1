@@ -20,7 +20,7 @@ public:
 	void agregarTabla(const Tabla& T, string nombre);//T
 
   /// @generador
-  /// @requiere not (pertenece(nombre,nombresDeLasTablas))
+  /// @requiere pertenece(nombre,nombresDeLasTablas)
 	void agregarENTabla(string nombre, Registro r);//L
 
   // existe tabla a la que se le aplica el criterio, y(luego) criteriovalido para la bd, tabla y criterio
