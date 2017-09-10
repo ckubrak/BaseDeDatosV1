@@ -85,14 +85,8 @@ vector<Criterio> BaseDeDatos::criteriosMasUsado() const {
 
 bool BaseDeDatos::insercionValida(const Tabla& T, Registro r){
   if(!seteq(T.campos(), r.campos())) return false;
-  vector<string> campos = T.campos();
-  vector<Registro> registros = T.registros();
-  for(unsigned int i = 0; i < campos.size(); i++){
-    for(unsigned int j = 0; j < registros.size(); j++){
-      if(registros[j].dato(campos[i]) == r.dato(campos[i])){
-        return false;
-      }
-    }
+  for(unsigned int j = 0; j < T.registros().size(); j++){
+    if(T.registros()[j] == r) return false;
   }
   return true;
 }
